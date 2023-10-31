@@ -123,6 +123,9 @@ class Garmin:
         self.garmin_connect_activities = (
             "/activitylist-service/activities/search/activities"
         )
+        self.garmin_connect_activity_feed = (
+            "/activitylist-service/activities/comments/subscriptionFeed"
+        )
         self.garmin_connect_activity = "/activity-service/activity"
         self.garmin_connect_activity_types = (
             "/activity-service/activity/activityTypes"
@@ -748,6 +751,15 @@ class Garmin:
         url = self.garmin_connect_activities
         params = {"start": str(start), "limit": str(limit)}
         logger.debug("Requesting activities")
+
+        return self.connectapi(url, params=params)
+
+    def get_activity_feed(self, start, limit):
+        """Return available activity feed."""
+
+        url = self.garmin_connect_activity_feed
+        params = {"start": str(start), "limit": str(limit)}
+        logger.debug("Requesting activity feed")
 
         return self.connectapi(url, params=params)
 
